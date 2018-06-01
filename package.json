@@ -1,5 +1,6 @@
 {
   "name": "web-starter-react",
+  "author": "CHOTIPAT POOWONGTHANARAT",
   "version": "1.0.0",
   "description": "Start React",
   "main": "index.js",
@@ -8,7 +9,6 @@
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development --open Chrome"
   },
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "6.26.3",
