@@ -6,7 +6,7 @@ export const login = (props, callback) => async dispatch =>{
     try {
         const respone = await axios({
             method: 'post',
-            url: 'http://localhost:3090/signin',
+            url: 'http://localhost:4000/signin',
             data:{
                 email,
                 password
@@ -16,6 +16,6 @@ export const login = (props, callback) => async dispatch =>{
         localStorage.setItem('token', respone.data.token)
         callback()
     } catch (error){
-        dispatch({ type: AUTH_USER.FAILURE, data: "ERROR"})
+        dispatch({ type: AUTH_USER.FAILURE, data: 'Email or password Invalid'})
     }
 }
