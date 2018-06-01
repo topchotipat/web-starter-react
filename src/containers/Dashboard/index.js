@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../../actions/authentication'
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
+  doLogout() {
+    this.props.signout(()=>{
+      this.props.history.push('/')
+    })
+  }
   render() {
     return (
       <div >
         <div >
           Dashboard
-          <button>
+          <button onClick={this.doLogout.bind(this)}>
             Log out
           </button>
         </div>
@@ -14,3 +21,5 @@ export default class Dashboard extends Component {
     )
   }
 }
+
+export default connect(null, actions)(Dashboard)

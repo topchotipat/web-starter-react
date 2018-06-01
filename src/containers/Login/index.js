@@ -19,22 +19,21 @@ class Login extends Component{
             <div id="login-form" className={styles.container}>
                  <div className={styles.login}>
                     <form onSubmit={handleSubmit(this.onSubmit)} >
-                    <fieldset>
-                        <label>Email</label>
+                        <h1>Log in</h1>
+                        <div className={styles.form_item}>
                         <Field
                             name='email'
                             type='text'
                             component={inputText}
                         />
-                    </fieldset>
-                    <fieldset>
-                        <label>Password</label>
+                          </div>
+                          <div className={styles.form_item}>
                         <Field
                             name='password'
                             type='password'
                             component={inputText}
                         />
-                    </fieldset>
+                          </div>
                     <ul className={styles.error_messages}>
                         {this.props.errorMessage}
                     </ul>

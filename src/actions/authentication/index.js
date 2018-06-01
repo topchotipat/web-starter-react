@@ -19,3 +19,9 @@ export const login = (props, callback) => async dispatch =>{
         dispatch({ type: AUTH_USER.FAILURE, data: 'Email or password Invalid'})
     }
 }
+
+export const signout = (callback) => dispatch =>{
+    localStorage.removeItem('token')
+    dispatch({ type: AUTH_USER, payload: '' })
+    callback()
+}
