@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { reduxForm, Field } from 'redux-form'
-import * as actions from '../../../actions/authentication'
+import * as actions from '../../actions/authentication'
 
 class Login extends Component{
     onSubmit = (Props) =>{
@@ -29,13 +29,6 @@ class Login extends Component{
                         type='password'
                         component='input'
                     />
-                </fieldset>
-                <fieldset>
-                    <label>Role</label>
-                    <Field name="role" component="select">
-                        <option value="Normal">Normal</option>
-                        <option value="Admin">Admin</option>
-                    </Field>
                 </fieldset>
                 <div>{this.props.errorMessage}</div>
                 <button>Sign In!</button>

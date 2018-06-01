@@ -1,4 +1,4 @@
-import { AUTH_USER } from '../../constants/actionType'
+import { AUTH_USER } from '../constants/actionType'
 
 const INITIAL_STATE = {
     authenticated: '',
