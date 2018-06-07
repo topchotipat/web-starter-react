@@ -10,7 +10,7 @@ import styles from './login.scss'
 class Login extends Component{
     onSubmit = (Props) =>{
         this.props.login(Props,()=>{
-            this.props.history.push('/dashboard')
+            this.props.history.push('/')
         })
     }
     render(){

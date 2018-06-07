@@ -16,6 +16,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -36,6 +37,7 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
+    historyApiFallback: true,
     port: 3090,
     contentBase: path.join(__dirname, 'dist')
   }
