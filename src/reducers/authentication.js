@@ -5,12 +5,18 @@ const INITIAL_STATE = {
     errorMessege: ''
 }
 
-export default (state = INITIAL_STATE, action)=>{
-    switch(action.type){
+export default (state = INITIAL_STATE, action) => {
+    switch (action.type) {
         case AUTH_USER.SUCCESS:
-            return {...state, authenticated: action.data}
+            return {
+                ...state,
+                authenticated: action.data
+            }
         case AUTH_USER.FAILURE:
-            return {...state, errorMessage: action.data}
+            return {
+                ...state,
+                errorMessage: action.data
+            }
         default:
             return state
     }
