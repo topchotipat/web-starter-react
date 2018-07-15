@@ -3,40 +3,55 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { reduxForm, Field } from 'redux-form'
 import { fetchLoginUser } from '../../../actions'
-import inputText from '../../../common/inputText'
+import { InputText } from '../../../common'
 import { isEmail } from '../../../services/utilities/validation'
 import styles from '../login.scss'
+import Loader from 'react-loader-spinner'
 
 class Login extends Component {
     onSubmit = (Props) => {
-        this.props.fetchLoginUser(Props, () => {
-            this.props.history.push('/')
+        this.props.fetchLoginUser(Props, error => {
+            if (error) {
+                alert(error)
+            } else {
+                this.props.history.push('/')
+            }
         })
     }
     render() {
-        const { handleSubmit } = this.props
+        const { handleSubmit, isLoading } = this.props
         return (
             <div id="login-form" className={styles.container}>
-                <div className={styles.login}>
+                {
+                    isLoading && <div className={styles.loader}>
+                        <Loader
+                            type="Ball-Triangle"
+                            color="#00BFFF"
+                            height="80"
+                            width="80"
+                        />
+                    </div>
+
+                }
+                <div className={styles.box}>
                     <form onSubmit={handleSubmit(this.onSubmit)} >
                         <h1>Log in</h1>
                         <div className={styles.form_item}>
                             <Field
                                 name='email'
+                                placeholder='email'
                                 type='text'
-                                component={inputText}
+                                component={InputText}
                             />
                         </div>
                         <div className={styles.form_item}>
                             <Field
                                 name='password'
+                                placeholder='password'
                                 type='password'
-                                component={inputText}
+                                component={InputText}
                             />
                         </div>
-                        <ul className={styles.error_messages}>
-                            {this.props.errorMessage}
-                        </ul>
                         <div className={styles.form_submit}>
                             <button>Log in</button>
                         </div>
@@ -47,11 +62,9 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        errorMessage: state.auth.errorMessage
-    }
-}
+const mapStateToProps = state => ({
+    isLoading: state.auth.isLoading
+})
 
 const validate = (values) => {
     const errors = {}

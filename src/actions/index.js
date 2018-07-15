@@ -1,7 +1,8 @@
-import { fetchLoginUser, signout } from './authentication'
+import { fetchLoginUser, signOut, setUserToken } from './authentication'
 
 export {
     // Authentication
     fetchLoginUser,
-    signout
+    signOut,
+    setUserToken
 }
