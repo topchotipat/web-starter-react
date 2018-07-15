@@ -1,7 +1,9 @@
 import generateActionType from './generateActionType'
 import handleError from './handleError'
+import { isEmail } from './validations'
 
-export{
+export {
     generateActionType,
-    handleError
+    handleError,
+    isEmail
 }

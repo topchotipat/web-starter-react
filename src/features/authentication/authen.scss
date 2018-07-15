@@ -41,6 +41,21 @@
       margin-top: 30px;
       justify-content: space-around;
 
+      a{
+        &:link {
+          text-decoration: none;
+        }
+        &:hover {
+          opacity: 0.8;
+        }
+        &:visited {
+          color: black;
+        }
+        &:active {
+          color: black;
+        }
+      }
+
       button {
         cursor: pointer;
       }

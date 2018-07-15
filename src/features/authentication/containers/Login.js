@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
 import { fetchLoginUser } from '../../../actions'
 import { InputText } from '../../../common'
-import { isEmail } from '../../../services/utilities/validation'
+import { isEmail } from '../../../utils'
 import styles from '../authen.scss'
 
 
@@ -56,11 +56,7 @@ class Login extends Component {
                         </div>
                         <div className={styles.form_submit}>
                             <button>SUBMIT</button>
-                            <button>
-                                <Link to="/signup" style={{ textDecoration: 'none' }}>
-                                    Sign up
-                                </Link>
-                            </button>
+                            <Link to="/signup">Sign up</Link>
                         </div>
                     </form>
                 </div>
