@@ -1,27 +1,43 @@
-import { AUTH_USER } from '../constants/actionType'
+import { LOGIN_USER, SIGNUP_USER } from '../constants/actionType'
 
 const INITIAL_STATE = {
     user: {},
-    isLoading: false
+    isLogInLoading: false,
+    isSignUpLoading: false
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case AUTH_USER.REQUEST:
+        case LOGIN_USER.REQUEST:
             return {
                 ...state,
-                isLoading: true
+                isLogInLoading: true
             }
-        case AUTH_USER.SUCCESS:
+        case LOGIN_USER.SUCCESS:
             return {
                 ...state,
-                isLoading: false,
+                isLogInLoading: false,
                 user: action.data,
             }
-        case AUTH_USER.FAILURE:
+        case LOGIN_USER.FAILURE:
             return {
                 ...state,
-                isLoading: false
+                isLogInLoading: false
+            }
+        case SIGNUP_USER.REQUEST:
+            return {
+                ...state,
+                isSignUpLoading: true
+            }
+        case SIGNUP_USER.SUCCESS:
+            return {
+                ...state,
+                isSignUpLoading: false,
+            }
+        case SIGNUP_USER.FAILURE:
+            return {
+                ...state,
+                isSignUpLoading: false
             }
         default:
             return state

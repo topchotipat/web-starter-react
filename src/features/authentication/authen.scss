@@ -34,8 +34,12 @@
     }
 
     :local(.form_submit) {
+      display: flex;
       text-align: center;
+      margin-left: 50px;
+      margin-right: 50px;
       margin-top: 30px;
+      justify-content: space-around;
 
       button {
         cursor: pointer;

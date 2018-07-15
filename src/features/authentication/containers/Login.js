@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { reduxForm, Field } from 'redux-form'
+import Loader from 'react-loader-spinner'
+import { Link } from 'react-router-dom'
 import { fetchLoginUser } from '../../../actions'
 import { InputText } from '../../../common'
 import { isEmail } from '../../../services/utilities/validation'
-import styles from '../login.scss'
-import Loader from 'react-loader-spinner'
+import styles from '../authen.scss'
+
 
 class Login extends Component {
     onSubmit = (Props) => {
@@ -19,11 +21,11 @@ class Login extends Component {
         })
     }
     render() {
-        const { handleSubmit, isLoading } = this.props
+        const { handleSubmit, isLogInLoading } = this.props
         return (
             <div id="login-form" className={styles.container}>
                 {
-                    isLoading && <div className={styles.loader}>
+                    isLogInLoading && <div className={styles.loader}>
                         <Loader
                             type="Ball-Triangle"
                             color="#00BFFF"
@@ -35,7 +37,7 @@ class Login extends Component {
                 }
                 <div className={styles.box}>
                     <form onSubmit={handleSubmit(this.onSubmit)} >
-                        <h1>Log in</h1>
+                        <h1>LOG IN</h1>
                         <div className={styles.form_item}>
                             <Field
                                 name='email'
@@ -53,7 +55,12 @@ class Login extends Component {
                             />
                         </div>
                         <div className={styles.form_submit}>
-                            <button>Log in</button>
+                            <button>SUBMIT</button>
+                            <button>
+                                <Link to="/signup" style={{ textDecoration: 'none' }}>
+                                    Sign up
+                                </Link>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -63,7 +70,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    isLoading: state.auth.isLoading
+    isLogInLoading: state.auth.isLogInLoading
 })
 
 const validate = (values) => {
