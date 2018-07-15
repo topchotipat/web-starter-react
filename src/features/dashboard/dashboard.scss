@@ -4,10 +4,10 @@
     min-height: 100vh;
     background-color: #EBECEE;
 
-
     :local(.navBar) {
         display: flex;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-around;
         align-items: center;
         text-align: center;
         padding: 10px 10px;
@@ -23,13 +23,8 @@
             padding: 0;
             overflow: hidden;
         }
-        
-        span{
-            padding-right: 100px;
-        }
 
         input{
-            margin-right: 300px;
             margin-bottom: 7px;
             height: 25px;
             width: 160px;
@@ -42,7 +37,49 @@
         }
 
         i{
-            padding-left: 350px;
+            padding-right: 10px;
+            color: gray;
+        }
+    }
+    :local(.mainBox) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        :local(.leftBox){
+            width: 270px;
+
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #FDFDFD;
+                border-radius: 2px;
+            }
+
+            li {
+                a {
+                    height: 29px;
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+                    color: #43505D;
+                    text-align: center;
+                    padding: 5px 0px 5px 0px;
+                    text-decoration: none;
+                    &:hover {
+                        background-color: #F2F2F2;
+                    }
+                }
+            }
+            i{
+                padding-left: 10px;
+            }
+            span{
+                padding-left: 8px;
+            }
         }
     }
 }

@@ -18,9 +18,11 @@ const NavBar = ({ props }) => (
         </ul>
         <ul>
             <a href='#'>
+                <i className="material-icons">person</i>
+            </a>
+            <a href='#'>
                 <i onClick={() => onLogout(props)} className="material-icons">exit_to_app</i>
             </a>
-
         </ul>
     </div>
 )
