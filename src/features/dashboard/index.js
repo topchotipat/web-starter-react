@@ -1,25 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {signOut}from '../../actions'
+import EditPreferences from './containers/EditPreferences'
+import NavBar from './components/NavBar'
 
-class Dashboard extends Component {
-  doLogout() {
-    this.props.signOut(()=>{
-      this.props.history.push('/login')
-    })
-  }
-  render() {
-    return (
-      <div >
-        <div >
-          Dashboard
-          <button onClick={this.doLogout.bind(this)}>
-            Log out
-          </button>
-        </div>
-      </div>
-    )
-  }
+export{
+  EditPreferences,
+  NavBar
 }
-
-export default connect(null, {signOut})(Dashboard)
