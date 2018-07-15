@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../../actions/authentication'
+import {signOut}from '../../actions'
 
 class Dashboard extends Component {
   doLogout() {
-    this.props.signout(()=>{
+    this.props.signOut(()=>{
       this.props.history.push('/login')
     })
   }
@@ -22,4 +22,4 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(null, actions)(Dashboard)
+export default connect(null, {signOut})(Dashboard)

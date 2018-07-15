@@ -1,3 +1,4 @@
-import { generateActionType } from '../services/utilities/genFunction'
+import { generateActionType } from '../utils'
 
-export const AUTH_USER = generateActionType('AUTH_USER')
+export const LOGIN_USER = generateActionType('LOGIN_USER')
+export const SIGNUP_USER = generateActionType('SIGNUP_USER')
