@@ -55,7 +55,7 @@ class Login extends Component {
                             />
                         </div>
                         <div className={styles.form_submit}>
-                            <button>SUBMIT</button>
+                            <button type='submit'>SUBMIT</button>
                             <Link to="/signup">Sign up</Link>
                         </div>
                     </form>

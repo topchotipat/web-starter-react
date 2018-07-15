@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { NavBar, LeftBox, EditPreferences } from '../dashboard'
 import styles from './dashboard.scss'
+import { connect } from 'react-redux'
+import { signOut } from '../../actions'
 
 class MainDashboard extends Component {
     render() {
@@ -21,4 +23,4 @@ class MainDashboard extends Component {
     }
 }
 
-export default MainDashboard
+export default connect(null, { signOut })(MainDashboard)
