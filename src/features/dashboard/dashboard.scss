@@ -47,6 +47,14 @@
         justify-content: center;
         align-items: flex-start;
 
+        :local(.loader) {
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            padding-left: 100px;
+            min-height: 100vh;
+          }
+
         :local(.leftBox){
             width: 270px;
 

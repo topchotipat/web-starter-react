@@ -4,11 +4,19 @@ import {
     setUserToken,
     fetchSignUpUser
 } from './authentication'
+import {
+    fetchPreferences,
+    fetchUpsertPreferences
+} from './editPreferences'
 
 export {
     // Authentication
     fetchLoginUser,
     fetchSignUpUser,
     signOut,
-    setUserToken
+    setUserToken,
+
+    // Edit Preferences
+    fetchPreferences,
+    fetchUpsertPreferences
 }

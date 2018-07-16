@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { compose } from 'redux'
+import Loader from 'react-loader-spinner'
 import styles from '../dashboard.scss'
+import { fetchUpsertPreferences, fetchPreferences } from '../../../actions'
 import { language, timeZone, currency } from '../../../constants/mockData'
 
 class EditPreferences extends Component {
@@ -13,13 +15,34 @@ class EditPreferences extends Component {
         this.props.change('currency', 'dollars')
     }
     componentDidMount() {
-        console.log('1')
+        const { fetchPreferences, dataPreferences } = this.props
+        fetchPreferences(error => {
+            if (error) {
+                alert(error)
+            }
+        })
+        console.log('dataPreferences22',dataPreferences)
+    }
+    componentDidUpdate(pre) {
+        const { dataPreferences } = this.props
+        if (dataPreferences) {
+            this.props.change('language', dataPreferences.language)
+            this.props.change('timeZone', dataPreferences.timeZone)
+            this.props.change('currency', dataPreferences.currency)
+            console.log('dataPreferences', dataPreferences)
+        }
     }
     onSubmit = (Props) => {
-        console.log('Props', Props)
+        this.props.fetchUpsertPreferences(Props, error => {
+            if (error) {
+                alert(error)
+            } else {
+                alert('OK Update data success')
+            }
+        })
     }
     render() {
-        const { handleSubmit, reduxFormValues } = this.props
+        const { handleSubmit, reduxFormValues, isLoading } = this.props
         const error = reduxFormValues && reduxFormValues.syncErrors
         return (
             <div className={styles.editPreference} >
@@ -64,6 +87,17 @@ class EditPreferences extends Component {
                         </div>
                         <hr align='center' width='100%' color='#EBECEE' />
                     </ul>
+                    {
+                        isLoading && <div className={styles.loader}>
+                            <Loader
+                                type="Ball-Triangle"
+                                color="#00BFFF"
+                                height="80"
+                                width="80"
+                            />
+                        </div>
+
+                    }
                     <ul>
                         <label>Privacy</label>
                         <div className={styles.tabEdit}>
@@ -75,7 +109,7 @@ class EditPreferences extends Component {
                                     people you follow or in anyone's search results</p>
                                     <div className={styles.textRadio}>
                                         <Field
-                                            name="visible"
+                                            name="profileVisibility"
                                             component="input"
                                             type="radio"
                                             value="everyone"
@@ -83,7 +117,7 @@ class EditPreferences extends Component {
                                         {' '}Everyone
                                    <div style={{ paddingLeft: 20 }} />
                                         <Field
-                                            name="visible"
+                                            name="profileVisibility"
                                             component="input"
                                             type="radio"
                                             value="private"
@@ -97,7 +131,7 @@ class EditPreferences extends Component {
                                     <p style={{ marginTop: -5 }}>Control who can send you messages</p>
                                     <div className={styles.textRadio}>
                                         <Field
-                                            name="message"
+                                            name="messages"
                                             component="input"
                                             type="radio"
                                             value="everyone"
@@ -105,7 +139,7 @@ class EditPreferences extends Component {
                                         {' '}Everyone
                                    <div style={{ marginLeft: 20 }} />
                                         <Field
-                                            name="message"
+                                            name="messages"
                                             component="input"
                                             type="radio"
                                             value="follow"
@@ -141,7 +175,7 @@ class EditPreferences extends Component {
                                     people you follow or in anyone's search results</p>
                                     <div className={styles.textRadio}>
                                         <Field
-                                            name="list"
+                                            name="categoryLists"
                                             component="input"
                                             type="radio"
                                             value="enable"
@@ -149,7 +183,7 @@ class EditPreferences extends Component {
                                         {' '}Enable
                                    <div style={{ paddingLeft: 20 }} />
                                         <Field
-                                            name="list"
+                                            name="categoryLists"
                                             component="input"
                                             type="radio"
                                             value="disable"
@@ -174,20 +208,22 @@ class EditPreferences extends Component {
 }
 
 const mapStateToProps = state => ({
-    reduxFormValues: state.form.EditPreferences
+    reduxFormValues: state.form.EditPreferences,
+    isLoading: state.preferences.isLoading,
+    dataPreferences: state.preferences.dataPreferences
 })
 
 const validate = (values) => {
     const errors = {}
 
-    if (!values.list) {
-        errors.list = 'Check list is Required'
+    if (!values.categoryLists) {
+        errors.categoryLists = 'Check list is Required'
     }
-    if (!values.message) {
-        errors.message = 'Message is Required'
+    if (!values.messages) {
+        errors.messages = 'Message is Required'
     }
-    if (!values.visible) {
-        errors.visible = 'Visible is Required'
+    if (!values.profileVisibility) {
+        errors.profileVisibility = 'Visible is Required'
     }
     if (!values.currency) {
         errors.currency = 'Currency is Required'
@@ -204,7 +240,7 @@ const validate = (values) => {
 
 
 export default compose(
-    connect(mapStateToProps, null),
+    connect(mapStateToProps, { fetchUpsertPreferences, fetchPreferences }),
     reduxForm({
         form: 'EditPreferences',
         validate
