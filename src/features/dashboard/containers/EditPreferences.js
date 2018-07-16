@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner'
 import styles from '../dashboard.scss'
 import { fetchUpsertPreferences, fetchPreferences } from '../../../actions'
 import { language, timeZone, currency } from '../../../constants/mockData'
+import { isEmpty } from '../../../utils'
 
 class EditPreferences extends Component {
     constructor(props) {
@@ -13,23 +14,33 @@ class EditPreferences extends Component {
         this.props.change('language', 'English')
         this.props.change('timeZone', '0.0')
         this.props.change('currency', 'dollars')
+
+        this.state = {
+            fetch: false
+        }
     }
     componentDidMount() {
-        const { fetchPreferences, dataPreferences } = this.props
+        const { fetchPreferences } = this.props
         fetchPreferences(error => {
             if (error) {
                 alert(error)
+            } else {
+                this.setState({ fetch: true })
             }
         })
-        console.log('dataPreferences22',dataPreferences)
     }
     componentDidUpdate(pre) {
         const { dataPreferences } = this.props
-        if (dataPreferences) {
-            this.props.change('language', dataPreferences.language)
-            this.props.change('timeZone', dataPreferences.timeZone)
-            this.props.change('currency', dataPreferences.currency)
-            console.log('dataPreferences', dataPreferences)
+        const { fetch } = this.state
+
+        if (!isEmpty(dataPreferences) && fetch) {
+            this.props.change('language', dataPreferences.localization.language)
+            this.props.change('timeZone', dataPreferences.localization.timeZone)
+            this.props.change('currency', dataPreferences.localization.currency)
+            this.props.change('profileVisibility', dataPreferences.privacy.profileVisibility)
+            this.props.change('messages', dataPreferences.privacy.messages)
+            this.props.change('categoryLists', dataPreferences.content.categoryLists)
+            this.setState({ fetch: false })
         }
     }
     onSubmit = (Props) => {
@@ -147,7 +158,7 @@ class EditPreferences extends Component {
                                         {' '}People you follow
                                    <div style={{ marginLeft: 20 }} />
                                         <Field
-                                            name="message"
+                                            name="messages"
                                             component="input"
                                             type="radio"
                                             value="private"
@@ -243,6 +254,7 @@ export default compose(
     connect(mapStateToProps, { fetchUpsertPreferences, fetchPreferences }),
     reduxForm({
         form: 'EditPreferences',
-        validate
+        validate,
+        enableReinitialize: true
     })
 )(EditPreferences)
